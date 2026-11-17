@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10251f">
+<meta name="description" content="Personal investment research and tracking workspace.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>INVESTWISE — Personal Investment Research</title>
+<style>
+:root{--bg:#f4f6f3;--panel:#fff;--ink:#17251f;--muted:#66756d;--line:#e1e8e2;--green:#176b4b;--green2:#e7f3ec;--gold:#d9a441;--red:#a84444;--shadow:0 8px 28px rgba(23,37,31,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.shell{display:grid;grid-template-columns:245px 1fr;min-height:100vh}
+aside{background:#10251f;color:#eaf2ed;padding:26px 18px;display:flex;flex-direction:column;gap:26px}
+.brand{font-size:20px;font-weight:800;letter-spacing:1.6px}.brand span{display:block;color:#a7c5b4;font-size:10px;letter-spacing:2px;font-weight:600;margin-top:3px}
+nav{display:grid;gap:7px}nav button{border:0;background:transparent;color:#c4d4ca;text-align:left;padding:12px 13px;border-radius:10px;font-weight:600}nav button.active,nav button:hover{background:#214536;color:white}
+.side-note{margin-top:auto;border:1px solid #315443;border-radius:12px;padding:13px;color:#bfd1c5;font-size:12px}
+main{padding:28px clamp(16px,4vw,48px);max-width:1450px;width:100%;margin:auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:25px}.eyebrow{color:var(--green);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+h1{font-size:clamp(25px,3vw,34px);line-height:1.15;margin:5px 0 6px}.sub{color:var(--muted);margin:0}.local{font-size:12px;color:var(--muted);text-align:right}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.stat,.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}
+.stat{padding:17px}.stat small{color:var(--muted);font-weight:600}.stat strong{display:block;font-size:27px;margin-top:7px}.stat em{font-style:normal;color:var(--muted);font-size:12px}
+.panel{padding:20px;margin-bottom:17px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.panel h2{font-size:17px;margin:0}.muted{color:var(--muted)}
+.btn{border:0;border-radius:9px;padding:10px 14px;background:var(--green);color:white;font-weight:700}.btn.secondary{background:var(--green2);color:var(--green)}.btn.ghost{background:#f1f4f1;color:#33443b}.btn.danger{background:#faeeee;color:var(--red)}.btn.small{font-size:12px;padding:7px 10px}
+.row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.split{display:grid;grid-template-columns:1.3fr 1fr;gap:17px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.7px}tr:last-child td{border-bottom:0}
+.pill{display:inline-block;background:var(--green2);color:var(--green);font-size:11px;font-weight:700;padding:4px 8px;border-radius:20px}.empty{padding:28px 12px;text-align:center;color:var(--muted);font-size:13px}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}label{display:grid;gap:5px;font-size:12px;color:var(--muted);font-weight:700}input,select,textarea{width:100%;border:1px solid #d6dfd8;border-radius:9px;padding:10px 11px;background:white;color:var(--ink);outline:none}input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #176b4b18}textarea{min-height:90px;resize:vertical}.full{grid-column:1/-1}
+.hidden{display:none!important}.notice{background:#fff8e8;border:1px solid #f0dfb8;color:#75551d;border-radius:11px;padding:12px 14px;font-size:12px;margin-bottom:18px}
+.section{display:none}.section.active{display:block}.actions{display:flex;gap:7px;flex-wrap:wrap}.field-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.detail-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.detail{background:#f6f8f6;border-radius:10px;padding:12px}.detail small{display:block;color:var(--muted);font-size:11px}.detail b{font-size:14px;display:block;margin-top:3px}
+footer{color:var(--muted);font-size:11px;text-align:center;padding:15px}
+@media(max-width:850px){.shell{grid-template-columns:1fr}aside{padding:15px;gap:13px}.brand{font-size:18px}nav{display:flex;overflow:auto}nav button{white-space:nowrap;padding:9px 11px}.side-note{display:none}.grid{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}}
+@media(max-width:520px){main{padding:20px 13px}.top{align-items:flex-start}.local{display:none}.grid{gap:9px}.stat{padding:13px}.stat strong{font-size:23px}.panel{padding:15px}form,.field-grid,.detail-list{grid-template-columns:1fr}table{display:block;overflow-x:auto;white-space:nowrap}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+  <div class="brand">INVESTWISE<span>RESEARCH BEFORE CAPITAL</span></div>
+  <nav>
+    <button class="active" data-page="dashboard">▦ &nbsp; Dashboard</button>
+    <button data-page="watchlist">◉ &nbsp; Watchlist</button>
+    <button data-page="research">⌕ &nbsp; Research</button>
+    <button data-page="tracker">▤ &nbsp; Savings & tracker</button>
+  </nav>
+  <div class="side-note"><b>Investing principle</b><br>Knowledge first. Capital second. Never risk money you need for essentials.</div>
+</aside>
+<main>
+  <div class="top">
+    <div><div class="eyebrow">Personal investment intelligence</div><h1 id="pageTitle">Dashboard</h1><p class="sub" id="pageSub">A clear view of what you're researching.</p></div>
+    <div class="local">V1 · Personal workspace<br><span id="today"></span></div>
+  </div>
+  <div class="notice">Research workspace only. No live prices, trading, brokerage connection or guaranteed-return predictions. Your entries are saved in this browser on this device.</div>
+
+  <section class="section active" id="dashboard">
+    <div class="grid">
+      <div class="stat"><small>Saved opportunities</small><strong id="statCount">0</strong><em>Across all categories</em></div>
+      <div class="stat"><small>Research notes</small><strong id="statNotes">0</strong><em>Companies and assets reviewed</em></div>
+      <div class="stat"><small>Tracked savings</small><strong id="statSavings">₦0</strong><em>Entered by you</em></div>
+      <div class="stat"><small>Recorded investments</small><strong id="statInvested">₦0</strong><em>Manual entries only</em></div>
+    </div>
+    <div class="split">
+      <div class="panel"><div class="panel-head"><h2>Recently added</h2><button class="btn secondary small" onclick="showPage('watchlist')">Open watchlist</button></div><div id="recentList" class="empty">No opportunities yet. Add one to begin.</div></div>
+      <div class="panel"><div class="panel-head"><h2>Your research checklist</h2><span class="pill">Fundamentals</span></div>
+        <ul class="muted" style="padding-left:19px;margin:8px 0;font-size:13px"><li>Understand the business model</li><li>Compare competitors fairly</li><li>Review multi-year financial history</li><li>Assess earnings, cash flow and debt</li><li>Estimate value; compare with market price</li><li>Identify risks and reasons to wait</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="watchlist">
+    <div class="panel">
+      <div class="panel-head"><h2>Add an opportunity</h2><span class="muted" style="font-size:12px">Start with what you want to understand</span></div>
+      <form id="addForm">
+        <label>Company / investment name<input name="name" required placeholder="e.g. MTN Nigeria"></label>
+        <label>Category<select name="category"><option>Stock</option><option>ETF</option><option>Cryptocurrency</option><option>Mutual fund</option><option>Business / startup</option><option>Investment scheme</option><option>Other</option></select></label>
+        <label>Market / country<input name="market" placeholder="e.g. Nigeria / NGX"></label>
+        <label>Research status<select name="status"><option>To research</option><option>Researching</option><option>On watchlist</option><option>Reassess later</option><option>Not interested</option></select></label>
+        <label class="full">Why are you watching it?<textarea name="thesis" placeholder="What caught your attention? What do you want to verify?"></textarea></label>
+        <div class="full"><button class="btn" type="submit">Save opportunity</button></div>
+      </form>
+    </div>
+    <div class="panel"><div class="panel-head"><h2>My watchlist</h2><span class="muted" id="watchCount">0 saved</span></div><div id="watchTable" class="empty">Your saved opportunities will appear here.</div></div>
+  </section>
+
+  <section class="section" id="research">
+    <div class="panel">
+      <div class="panel-head"><h2>Company research record</h2><span class="pill">Manual analysis</span></div>
+      <form id="researchForm">
+        <label>Choose opportunity<select name="itemId" id="researchItem" required><option value="">Select from watchlist</option></select></label>
+        <label>Research date<input type="date" name="date" id="researchDate"></label>
+        <label>Market capitalisation<input name="marketCap" placeholder="Value + currency / units"></label>
+        <label>Share price<input name="sharePrice" placeholder="Price + currency"></label>
+        <label>Revenue trend<input name="revenue" placeholder="e.g. +12% year-on-year"></label>
+        <label>Profit / EPS trend<input name="profit" placeholder="e.g. profit down 5%; EPS ..."></label>
+        <label>Debt and purpose<input name="debt" placeholder="Amount, maturity, why borrowed"></label>
+        <label>Cash flow<input name="cashflow" placeholder="Operating cash flow trend"></label>
+        <label>Valuation<input name="valuation" placeholder="P/E, P/B, EV/EBITDA, fair-value estimate"></label>
+        <label>Competitors<input name="competitors" placeholder="Names and comparison"></label>
+        <label class="full">Risks, evidence and questions<textarea name="risks" placeholder="What could go wrong? What evidence supports your view?"></textarea></label>
+        <label class="full">Your current decision<select name="decision"><option>Still researching</option><option>Watch</option><option>Wait / reassess later</option><option>Not suitable</option><option>Potential candidate — needs more work</option></select></label>
+        <div class="full"><button class="btn" type="submit">Save research record</button></div>
+      </form>
+    </div>
+    <div class="panel"><div class="panel-head"><h2>Saved research records</h2></div><div id="researchList" class="empty">No research records yet.</div></div>
+  </section>
+
+  <section class="section" id="tracker">
+    <div class="split">
+      <div class="panel">
+        <div class="panel-head"><h2>Record savings</h2></div>
+        <form id="savingForm">
+          <label class="full">Amount (₦)<input name="amount" type="number" min="0" step="0.01" required placeholder="0.00"></label>
+          <label class="full">Date<input name="date" type="date" id="savingDate"></label>
+          <label class="full">Note<input name="note" placeholder="e.g. Monthly savings"></label>
+          <div class="full"><button class="btn" type="submit">Add savings record</button></div>
+        </form>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Record an investment</h2></div>
+        <form id="investmentForm">
+          <label class="full">Investment<select name="itemId" id="investmentItem"><option value="">Select from watchlist</option></select></label>
+          <label class="full">Amount invested (₦)<input name="amount" type="number" min="0" step="0.01" required placeholder="0.00"></label>
+          <label class="full">Date<input name="date" type="date" id="investmentDate"></label>
+          <label class="full">Note<input name="note" placeholder="Units, transaction reference kept privately, etc."></label>
+          <div class="full"><button class="btn" type="submit">Add investment record</button></div>
+        </form>
+      </div>
+    </div>
+    <div class="panel"><div class="panel-head"><h2>Activity</h2><span class="muted" style="font-size:12px">Manual records · no bank connection</span></div><div id="activityList" class="empty">No savings or investment records yet.</div></div>
+  </section>
+  <footer>INVESTWISE V1 · Your entries stay in this browser. Export a backup regularly.</footer>
+</main>
+</div>
+<script>
+const KEY='investwise_v1_data';
+let db=JSON.parse(localStorage.getItem(KEY)||'{"items":[],"research":[],"savings":[],"investments":[]}');
+const money=n=>'₦'+Number(n||0).toLocaleString('en-NG',{maximumFractionDigits:2});
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const save=()=>{localStorage.setItem(KEY,JSON.stringify(db));render()};
+const today=new Date().toISOString().slice(0,10);
+document.getElementById('today').textContent=new Date().toLocaleDateString('en-NG',{day:'numeric',month:'short',year:'numeric'});
+['researchDate','savingDate','investmentDate'].forEach(id=>document.getElementById(id).value=today);
+const titles={dashboard:['Dashboard','A clear view of what you are researching.'],watchlist:['Watchlist','Collect opportunities and decide what deserves further research.'],research:['Research','Build an evidence-based view of each company or investment.'],tracker:['Savings & tracker','Record your savings and investments manually.']};
+function showPage(id){document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id));document.getElementById('pageTitle').textContent=titles[id][0];document.getElementById('pageSub').textContent=titles[id][1]}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function refreshSelects(){['researchItem','investmentItem'].forEach(id=>{let el=document.getElementById(id),v=el.value;el.innerHTML='<option value="">Select from watchlist</option>'+db.items.map(i=>`<option value="${i.id}">${esc(i.name)}</option>`).join('');el.value=v})}
+function render(){
+document.getElementById('statCount').textContent=db.items.length;document.getElementById('statNotes').textContent=db.research.length;
+document.getElementById('statSavings').textContent=money(db.savings.reduce((a,x)=>a+Number(x.amount),0));
+document.getElementById('statInvested').textContent=money(db.investments.reduce((a,x)=>a+Number(x.amount),0));
+document.getElementById('watchCount').textContent=db.items.length+' saved';
+document.getElementById('recentList').innerHTML=db.items.length?db.items.slice(-5).reverse().map(i=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)"><div><b>${esc(i.name)}</b><div class="muted" style="font-size:12px">${esc(i.category)} · ${esc(i.market||'Market not specified')}</div></div><span class="pill">${esc(i.status)}</span></div>`).join(''):'<div class="empty">No opportunities yet. Add one to begin.</div>';
+document.getElementById('watchTable').innerHTML=db.items.length?`<table><thead><tr><th>Opportunity</th><th>Category</th><th>Market</th><th>Status</th><th>Action</th></tr></thead><tbody>${db.items.slice().reverse().map(i=>`<tr><td><b>${esc(i.name)}</b><div class="muted">${esc(i.thesis||'')}</div></td><td>${esc(i.category)}</td><td>${esc(i.market||'—')}</td><td><select aria-label="Update status" onchange="updateStatus('${i.id}',this.value)">${['To research','Researching','On watchlist','Reassess later','Not interested'].map(s=>`<option ${s===i.status?'selected':''}>${s}</option>`).join('')}</select></td><td><button class="btn danger small" onclick="removeItem('${i.id}')">Delete</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Your saved opportunities will appear here.</div>';
+document.getElementById('researchList').innerHTML=db.research.length?db.research.slice().reverse().map(r=>{let item=db.items.find(i=>i.id===r.itemId);return `<div style="padding:13px 0;border-bottom:1px solid var(--line)"><div class="panel-head"><b>${esc(item?.name||'Deleted opportunity')}</b><span class="pill">${esc(r.decision)}</span></div><div class="detail-list">${[['Market cap',r.marketCap],['Share price',r.sharePrice],['Revenue',r.revenue],['Profit / EPS',r.profit],['Debt',r.debt],['Cash flow',r.cashflow],['Valuation',r.valuation],['Competitors',r.competitors]].map(([k,v])=>`<div class="detail"><small>${k}</small><b>${esc(v||'Not recorded')}</b></div>`).join('')}</div><p class="muted" style="font-size:12px">${esc(r.date||'')} · ${esc(r.risks||'No risk notes added')}</p><button class="btn danger small" onclick="removeResearch('${r.id}')">Delete record</button></div>`}).join(''):'<div class="empty">No research records yet.</div>';
+const acts=[...db.savings.map(x=>({...x,type:'Savings'})),...db.investments.map(x=>({...x,type:'Investment'}))].sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+document.getElementById('activityList').innerHTML=acts.length?`<table><thead><tr><th>Type</th><th>Date</th><th>Details</th><th>Amount</th><th></th></tr></thead><tbody>${acts.map(x=>`<tr><td>${x.type}</td><td>${esc(x.date||'')}</td><td>${esc(x.note||db.items.find(i=>i.id===x.itemId)?.name||'—')}</td><td>${money(x.amount)}</td><td><button class="btn danger small" onclick="removeActivity('${x.id}','${x.type}')">Delete</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">No savings or investment records yet.</div>';
+refreshSelects();
+}
+function id(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+document.getElementById('addForm').addEventListener('submit',e=>{e.preventDefault();let f=Object.fromEntries(new FormData(e.target));db.items.push({...f,id:id(),created:today});e.target.reset();save();showPage('watchlist')});
+document.getElementById('researchForm').addEventListener('submit',e=>{e.preventDefault();let f=Object.fromEntries(new FormData(e.target));db.research.push({...f,id:id()});e.target.reset();document.getElementById('researchDate').value=today;save()});
+document.getElementById('savingForm').addEventListener('submit',e=>{e.preventDefault();db.savings.push({...Object.fromEntries(new FormData(e.target)),id:id()});e.target.reset();document.getElementById('savingDate').value=today;save()});
+document.getElementById('investmentForm').addEventListener('submit',e=>{e.preventDefault();db.investments.push({...Object.fromEntries(new FormData(e.target)),id:id()});e.target.reset();document.getElementById('investmentDate').value=today;save()});
+window.updateStatus=(i,s)=>{let x=db.items.find(x=>x.id===i);if(x)x.status=s;save()};
+window.removeItem=i=>{if(confirm('Delete this opportunity? Its research records will remain.')){db.items=db.items.filter(x=>x.id!==i);save()}};
+window.removeResearch=i=>{if(confirm('Delete this research record?')){db.research=db.research.filter(x=>x.id!==i);save()}};
+window.removeActivity=(i,t)=>{if(confirm('Delete this record?')){let k=t==='Savings'?'savings':'investments';db[k]=db[k].filter(x=>x.id!==i);save()}};
+render();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+}
+</script>
+</body></html>
